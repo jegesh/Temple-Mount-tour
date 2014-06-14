@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.templemounttour.MainActivity"
+    android:orientation="vertical"
+    >
+    <TextView 
+        android:id="@+id/header_main_menu"
+        android:layout_width="match_parent"
+       
+        android:text="@string/header_main_menu"
+        style="@style/H1"
+        android:layout_height="80dp"
+        />
+    <LinearLayout 
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        >
+        <ImageButton
+            android:tag="@string/tag_button_live_tour"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/har_habait1"
+            android:onClick="startTour"
+            android:contentDescription="@string/tag_button_live_tour" />
+        <ImageButton
+            android:tag="@string/tag_button_offline_tour"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/looking_at_map"
+            android:onClick="startBrowsing"
+            android:contentDescription="@string/tag_button_offline_tour" />
+        
+    </LinearLayout>
+    </LinearLayout>
+

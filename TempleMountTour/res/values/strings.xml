@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Temple Mount Tour</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="header_main_menu">Ascending the Holy Mount</string>
+    <string name="tag_button_live_tour">live</string>
+    <string name="tag_button_offline_tour">offline</string>
+    <string name="title_activity_prep_verify">PrepVerifyActivity</string>
+    <string name="title_activity_tour_main_menu">TourMainMenuActivity</string>
+    <string name="verification_dunk">I went to the mikve</string>
+    <string name="verification_other_preps">I made all necessary preparations</string>
+    <string name="verification_no_shoes_etc">I know not to wear shoes or a wallet on the Temple Mount</string>
+    <string name="btn_start_tour">I\'m ready, let\'s go!</string>
+    <string name="message_unprepared">You\'re not ready!\nYou must complete all the above tasks before ascending the Temple Mount.</string>
+
+</resources>

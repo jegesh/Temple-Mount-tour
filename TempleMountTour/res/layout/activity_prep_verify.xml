@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.templemounttour.PrepVerifyActivity"
+    android:orientation="vertical" >
+	<CheckBox 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:id="@+id/check_dunked"
+	    android:text="@string/verification_dunk"
+	    
+	    />
+	<CheckBox android:id="@+id/check_preparations"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/verification_other_preps"/>
+	
+	<CheckBox android:id="@+id/check_items"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/verification_no_shoes_etc"/>
+	<Button 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/btn_start_tour"
+	    android:onClick="startTour"
+	    />
+	<TextView 
+	    android:id="@+id/message_unprepared"
+	    android:text="@string/message_unprepared"
+	    android:visibility="invisible"/>
+</LinearLayout>
+
