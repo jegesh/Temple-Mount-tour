@@ -1,15 +1,17 @@
 package com.example.templemounttour;
 
+import java.io.IOException;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 public class PrepVerifyActivity extends Activity {
 
@@ -25,7 +27,7 @@ public class PrepVerifyActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.prep_verify, menu);
+	//	getMenuInflater().inflate(R.menu.prep_verify, menu);
 		return true;
 	}
 
@@ -39,6 +41,33 @@ public class PrepVerifyActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void startTour(View v){
+		XMLLayoutParser parser = new XMLLayoutParser(this);
+		int[] checkboxes=null;
+		try {
+			checkboxes = parser.getElementIds(R.layout.activity_prep_verify, XMLLayoutParser.CHECKBOX);
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		boolean allChecked = true;
+		for(int id:checkboxes){
+			CheckBox cbox = (CheckBox)findViewById(id);
+			if(!cbox.isChecked())
+				allChecked = false;
+		}
+		if(allChecked){
+			Intent intent = new Intent(this,TourMainMenuActivity.class);
+			startActivity(intent);
+		}else{
+			TextView message = (TextView)findViewById(R.id.message_unprepared);
+			message.setVisibility(View.VISIBLE);
+		}
 	}
 
 }

@@ -1,5 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+<LinearLayout 
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,8 +12,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:id="@+id/check_dunked"
-	    android:text="@string/verification_dunk"
-	    
+	    android:text="@string/verification_dunk"	    
 	    />
 	<CheckBox android:id="@+id/check_preparations"
 	    android:layout_width="match_parent"
@@ -28,8 +30,12 @@
 	    android:onClick="startTour"
 	    />
 	<TextView 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="30dp"
 	    android:id="@+id/message_unprepared"
 	    android:text="@string/message_unprepared"
 	    android:visibility="invisible"/>
 </LinearLayout>
 
+</ScrollView>
