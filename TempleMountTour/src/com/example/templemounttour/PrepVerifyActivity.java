@@ -62,7 +62,7 @@ public class PrepVerifyActivity extends Activity {
 				allChecked = false;
 		}
 		if(allChecked){
-			Intent intent = new Intent(this,TourMainMenuActivity.class);
+			Intent intent = new Intent(this,MapActivity.class);
 			startActivity(intent);
 		}else{
 			TextView message = (TextView)findViewById(R.id.message_unprepared);

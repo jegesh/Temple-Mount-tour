@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startBrowsing(View v){ // offline tour
-		Intent intent = new Intent(this, TourMainMenuActivity.class);
+		Intent intent = new Intent(this, OfflineMapActivity.class);
 		startActivity(intent);
 		tourIsLive = false;
 	}

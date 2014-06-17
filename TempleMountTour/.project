@@ -30,4 +30,10 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>JAVA_HOME</name>
+			<value>file:/C:/Program%20Files/Java/jdk1.7.0_17</value>
+		</variable>
+	</variableList>
 </projectDescription>

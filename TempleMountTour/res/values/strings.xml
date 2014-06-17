@@ -14,5 +14,7 @@
     <string name="verification_no_shoes_etc">I know not to wear shoes or a wallet on the Temple Mount</string>
     <string name="btn_start_tour">I\'m ready, let\'s go!</string>
     <string name="message_unprepared">You\'re not ready!\nYou must complete all the above tasks before ascending the Temple Mount.</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_offline_map">OfflineMapActivity</string>
 
 </resources>
