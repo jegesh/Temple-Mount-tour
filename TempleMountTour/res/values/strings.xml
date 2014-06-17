@@ -16,5 +16,7 @@
     <string name="message_unprepared">You\'re not ready!\nYou must complete all the above tasks before ascending the Temple Mount.</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_offline_map">OfflineMapActivity</string>
+    <string name="legal_info" >Legal Notices</string>
+    <string name="legal_notices_confirmation">OK</string>
 
 </resources>

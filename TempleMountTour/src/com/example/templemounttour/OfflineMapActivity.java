@@ -55,7 +55,7 @@ public class OfflineMapActivity extends Activity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_offline_map,
+			View rootView = inflater.inflate(R.layout.fragment__map,
 					container, false);
 			return rootView;
 		}

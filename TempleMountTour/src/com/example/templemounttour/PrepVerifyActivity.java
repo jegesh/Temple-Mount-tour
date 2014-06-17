@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,7 +28,7 @@ public class PrepVerifyActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-	//	getMenuInflater().inflate(R.menu.prep_verify, menu);
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -37,7 +38,9 @@ public class PrepVerifyActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.legal_info) {
+			DialogFragment legalDialog = new LegalitiesDialog();
+			legalDialog.show(getFragmentManager(), "legal stuff");
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -62,7 +65,7 @@ public class PrepVerifyActivity extends Activity {
 				allChecked = false;
 		}
 		if(allChecked){
-			Intent intent = new Intent(this,MapActivity.class);
+			Intent intent = new Intent(this,TouringMapActivity.class);
 			startActivity(intent);
 		}else{
 			TextView message = (TextView)findViewById(R.id.message_unprepared);

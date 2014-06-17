@@ -11,7 +11,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_beit_mikdash"
@@ -42,7 +48,7 @@
             android:label="@string/title_activity_tour_main_menu" >
         </activity>
         <activity
-            android:name="com.example.templemounttour.MapActivity"
+            android:name="com.example.templemounttour.TouringMapActivity"
             android:label="@string/title_activity_map" >
         </activity>
         <activity
