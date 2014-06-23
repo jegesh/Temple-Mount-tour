@@ -2,6 +2,7 @@ package com.example.templemounttour;
 
 import java.util.HashMap;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -10,16 +11,18 @@ public class StationMarker {
 	public double latitude;
 	public String title;
 	public HashMap<String, TourPresentation> tours;
-	public SQLiteDatabase db;
+	SQLiteDatabase db;
 	
-	public StationMarker(double lat, double lng, String title){
-		this.title = title;
+	
+	public StationMarker(double lat, double lng, String name, Context act, SQLiteDatabase database){
+		this.title = name;
 		latitude = lat;
 		longitude = lng;
+		db = database;
 		
 	}
 	
-	private void populateTours(){
+	public void populateTours(){
 		Cursor c = null;
 		try {
 			c = db.query("tours", null, "tour = " + title, null, null, null, null);

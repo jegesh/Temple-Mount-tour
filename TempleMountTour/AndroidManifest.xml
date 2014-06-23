@@ -59,6 +59,14 @@
             android:name="com.example.templemounttour.StationActivity"
             android:label="@string/title_activity_station" >
         </activity>
+        <activity
+            android:name="com.example.templemounttour.StationMenuActivity"
+            android:label="@string/title_activity_station_menu"
+            android:parentActivityName="com.example.templemounttour.TouringMapActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.templemounttour.TouringMapActivity" />
+        </activity>
     </application>
 
 </manifest>

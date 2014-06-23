@@ -1,5 +1,6 @@
 package com.example.templemounttour;
 
+import java.io.File;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.DropBoxManager.Entry;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -29,6 +31,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class TouringMapActivity extends Activity  implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 	public static final String STATION_NAME = "station name";
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+	public static final double INITIAL_LATITUDE = 31.777358;
+	public static final double INITIAL_LONGITUDE = 35.235343;
 	GoogleMap gMap;
 	Location youAreHere;
 	LocationClient locClient;
@@ -40,6 +44,11 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 		getActionBar().hide();
+		AppDBHelper helper = new AppDBHelper(this);
+		helper.openDataBase();
+		db = new AppDBHelper(this).getReadableDatabase();
+		db = helper.db;
+			
 		
 /*		int viewerHeight = this.getWindow().getAttributes().height;
 		mView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, viewerHeight-60));
@@ -50,30 +59,34 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	@Override
 	protected void onStart() {
 		super.onStart();
-		locClient.connect();
+		
 	}
 	
 	@Override
 	protected void onStop() {
-		locClient.disconnect();
+		if(locClient!=null)
+			locClient.disconnect();
 		super.onStop();
 	}
 	
 	@Override
 	protected void onResume() {
 		if(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)==CommonStatusCodes.SUCCESS){
-			super.onResume();
+			
 			gMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_container)).getMap();
-			gMap.setMyLocationEnabled(true);
+			
 			locClient = new LocationClient(this, this, this);
 			// initialize database
 			setStations();
 			placeMarkers();
+			locClient.connect();
+			gMap.setMyLocationEnabled(true);
 		}
 		else{
 			Dialog d = GooglePlayServicesUtil.getErrorDialog(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, CONNECTION_FAILURE_RESOLUTION_REQUEST); // need to find request code
 			d.show();
 		}
+		super.onResume();
 	}
 
 	@Override
@@ -105,11 +118,14 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 		}
 		stations = new HashMap<>();
 		c.moveToFirst();
+		
 		for(int i = 0;i<c.getCount();i++){
 			//TODO values need to  be abstracted
-			StationMarker sm = new StationMarker(c.getDouble(2), c.getDouble(3), c.getString(1)); 
+			StationMarker sm = new StationMarker(c.getDouble(2), c.getDouble(3), c.getString(1),this,db); 
 			stations.put(sm.title, sm);
+			c.moveToNext();
 		}
+		Log.d("Help me", "No. of entries: "+stations.size());
 	}
 	
 	private void placeMarkers(){
@@ -121,8 +137,9 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			
 			@Override
 			public boolean onMarkerClick(Marker m) {
-				Intent intent = new Intent(getBaseContext(), StationActivity.class);
+				Intent intent = new Intent(getBaseContext(), StationMenuActivity.class);
 				intent.putExtra(STATION_NAME, m.getTitle());
+				startActivity(intent);
 				return true;
 			}
 		});
@@ -139,10 +156,14 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		youAreHere = locClient.getLastLocation();
-		gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(youAreHere.getLatitude(), youAreHere.getLongitude())));
-		gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		gMap.moveCamera(CameraUpdateFactory.zoomTo(16));
+		if(MainActivity.tourIsLive){
+			youAreHere = locClient.getLastLocation();
+			gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(youAreHere.getLatitude(), youAreHere.getLongitude())));
+		}else{
+			gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(INITIAL_LATITUDE,INITIAL_LONGITUDE)));
+		}
+		gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		gMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 		
 	}
 

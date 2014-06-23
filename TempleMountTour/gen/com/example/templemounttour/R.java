@@ -450,10 +450,12 @@ containing a value of this type.
         public static final int activity_offline_map=0x7f030002;
         public static final int activity_prep_verify=0x7f030003;
         public static final int activity_station=0x7f030004;
-        public static final int activity_tour_main_menu=0x7f030005;
-        public static final int fragment__map=0x7f030006;
-        public static final int fragment_station=0x7f030007;
-        public static final int legal_dialog_title=0x7f030008;
+        public static final int activity_station_menu=0x7f030005;
+        public static final int activity_tour_main_menu=0x7f030006;
+        public static final int fragment__map=0x7f030007;
+        public static final int fragment_station=0x7f030008;
+        public static final int fragment_station_menu=0x7f030009;
+        public static final int legal_dialog_title=0x7f03000a;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -461,7 +463,8 @@ containing a value of this type.
         public static final int offline_map=0x7f0a0002;
         public static final int prep_verify=0x7f0a0003;
         public static final int station=0x7f0a0004;
-        public static final int tour_main_menu=0x7f0a0005;
+        public static final int station_menu=0x7f0a0005;
+        public static final int tour_main_menu=0x7f0a0006;
     }
     public static final class string {
         public static final int action_settings=0x7f040022;
@@ -573,6 +576,7 @@ containing a value of this type.
         public static final int title_activity_offline_map=0x7f04002e;
         public static final int title_activity_prep_verify=0x7f040026;
         public static final int title_activity_station=0x7f040031;
+        public static final int title_activity_station_menu=0x7f040032;
         public static final int title_activity_tour_main_menu=0x7f040027;
         public static final int verification_dunk=0x7f040028;
         public static final int verification_no_shoes_etc=0x7f04002a;

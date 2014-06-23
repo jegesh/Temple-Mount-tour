@@ -1,5 +1,11 @@
 package com.example.templemounttour;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.concurrent.ExecutionException;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -7,8 +13,10 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,8 +50,18 @@ public class MainActivity extends Activity {
 		};
 		task.execute(new String[]{});
 		
+		// this code copies the database from the assets directory where it was imported, into a directory accessible by the app
+		AppDBHelper helper = new AppDBHelper(this);
+		try {
+			helper.createDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(helper.db!=null)
+			helper.db.close();
+			helper.close();
 	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -81,7 +99,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startBrowsing(View v){ // offline tour
-		Intent intent = new Intent(this, OfflineMapActivity.class);
+		Intent intent = new Intent(this, TouringMapActivity.class);
 		startActivity(intent);
 		tourIsLive = false;
 	}
