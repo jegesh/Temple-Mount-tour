@@ -5,6 +5,7 @@ import java.util.HashMap;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class StationMarker {
 	public double longitude;
@@ -22,21 +23,26 @@ public class StationMarker {
 		
 	}
 	
-	public void populateTours(){
+	public void populateTours(Context ctx){
 		Cursor c = null;
 		try {
-			c = db.query("tours", null, "tour = " + title, null, null, null, null);
+			c = db.query("tours", null, "station = ?" , new String[]{title}, null, null, null);
+			Log.d("populateTours", "no problems");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		tours = new HashMap<>();
-		c.moveToFirst();
-		for(int i = 0;i<c.getCount();i++){
-			//TODO values need to  be abstracted
-			TourPresentation tp = new TourPresentation(title, c.getString(2)); 
-			tp.stationText = c.getString(3);
-			// etc etc
-			tours.put(tp.tourName, tp);
+		if(c!=null){
+			boolean hasTour = c.moveToFirst();
+			Log.d("Has Tour?", Boolean.toString(hasTour));
+			for(int i = 0;i<c.getCount();i++){
+				//TODO values need to  be abstracted
+				TourPresentation tp = new TourPresentation(title, c.getString(1),ctx); 
+				
+				tours.put(tp.tourName, tp);
+				c.moveToNext();
+			}
+			c.close();
 		}
 	}
 

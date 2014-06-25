@@ -411,7 +411,7 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020022;
     }
     public static final class id {
-        public static final int action_settings=0x7f06001c;
+        public static final int action_settings=0x7f060024;
         public static final int book_now=0x7f060010;
         public static final int buyButton=0x7f06000a;
         public static final int buy_now=0x7f06000f;
@@ -426,7 +426,7 @@ containing a value of this type.
         public static final int holo_dark=0x7f060005;
         public static final int holo_light=0x7f060006;
         public static final int hybrid=0x7f060004;
-        public static final int legal_info=0x7f06001b;
+        public static final int legal_info=0x7f060023;
         public static final int map_container=0x7f060016;
         public static final int match_parent=0x7f06000c;
         public static final int message_unprepared=0x7f06001a;
@@ -437,8 +437,16 @@ containing a value of this type.
         public static final int sandbox=0x7f060008;
         public static final int satellite=0x7f060002;
         public static final int selectionDetails=0x7f06000b;
+        public static final int station_fragment_container=0x7f06001b;
+        public static final int station_menu_fragment_container=0x7f06001c;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
+        public static final int tour_audio=0x7f060022;
+        public static final int tour_explanation=0x7f060021;
+        public static final int tour_fragment_container=0x7f06001d;
+        public static final int tour_header=0x7f06001e;
+        public static final int tour_pic_container=0x7f060020;
+        public static final int tour_title=0x7f06001f;
         public static final int wrap_content=0x7f06000d;
     }
     public static final class integer {
@@ -447,15 +455,11 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_map=0x7f030001;
-        public static final int activity_offline_map=0x7f030002;
-        public static final int activity_prep_verify=0x7f030003;
-        public static final int activity_station=0x7f030004;
-        public static final int activity_station_menu=0x7f030005;
-        public static final int activity_tour_main_menu=0x7f030006;
-        public static final int fragment__map=0x7f030007;
-        public static final int fragment_station=0x7f030008;
-        public static final int fragment_station_menu=0x7f030009;
-        public static final int legal_dialog_title=0x7f03000a;
+        public static final int activity_prep_verify=0x7f030002;
+        public static final int activity_station_menu=0x7f030003;
+        public static final int fragment_station_menu=0x7f030004;
+        public static final int fragment_tour=0x7f030005;
+        public static final int legal_dialog_title=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -565,6 +569,7 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f04001e;
+        public static final int empty_list_message=0x7f040032;
         public static final int header_main_menu=0x7f040023;
         public static final int hello_world=0x7f040021;
         public static final int legal_info=0x7f04002f;
@@ -576,8 +581,10 @@ containing a value of this type.
         public static final int title_activity_offline_map=0x7f04002e;
         public static final int title_activity_prep_verify=0x7f040026;
         public static final int title_activity_station=0x7f040031;
-        public static final int title_activity_station_menu=0x7f040032;
+        public static final int title_activity_station_menu=0x7f040033;
         public static final int title_activity_tour_main_menu=0x7f040027;
+        public static final int title_station_menu=0x7f040034;
+        public static final int tour_header=0x7f040035;
         public static final int verification_dunk=0x7f040028;
         public static final int verification_no_shoes_etc=0x7f04002a;
         public static final int verification_other_preps=0x7f040029;

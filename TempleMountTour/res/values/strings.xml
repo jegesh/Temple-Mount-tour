@@ -19,6 +19,9 @@
     <string name="legal_info">Legal Notices</string>
     <string name="legal_notices_confirmation">OK</string>
     <string name="title_activity_station">StationActivity</string>
+    <string name="empty_list_message">No tours have been added for this station</string>
     <string name="title_activity_station_menu">StationMenuActivity</string>
-
+    <string name="title_station_menu">Available Tours</string>
+	<string name="tour_header">You\'re being guided by:</string>
+    
 </resources>
