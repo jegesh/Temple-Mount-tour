@@ -2,6 +2,8 @@ package com.example.templemounttour;
 
 import java.util.Set;
 
+import com.androidquery.AQuery;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -9,6 +11,7 @@ import android.app.ListFragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -152,15 +155,22 @@ Bundle b = getArguments();
 			TourPresentation tp = new TourPresentation(b.getString(StationMenuActivity.STATION_TITLE), b.getString(StationMenuActivity.TOUR_NAME), getActivity());
 			TextView titleTxt = (TextView)getActivity().findViewById(R.id.tour_title);
 			titleTxt.setText(tp.tourName);
-			LinearLayout iv = (LinearLayout)getActivity().findViewById(R.id.tour_pic_container);
+			LinearLayout llContainer = (LinearLayout)getActivity().findViewById(R.id.tour_pic_container);
 			LayoutParams layParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			if(tp.stationText!=null)
 				((TextView)getActivity().findViewById(R.id.tour_explanation)).setText(tp.stationText);
 			if(tp.picLinks!=null){
 				for(String link:tp.picLinks){
-					WebView wv = new WebView(getActivity());
-					iv.addView(wv, layParams);
-					wv.loadUrl(link);
+					ImageView iv = new ImageView(getActivity());
+					android.widget.LinearLayout.LayoutParams ivParams = (android.widget.LinearLayout.LayoutParams) new LayoutParams(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+					ivParams.gravity = Gravity.CENTER;
+					iv.setLayoutParams(ivParams);
+					AQuery aq = new AQuery(getActivity());
+					int ivId = MainActivity.generateViewId();
+					iv.setId(ivId);
+					aq.id(ivId).image(link);
+					llContainer.addView(iv);
+					
 				}
 			}
 			if(tp.audioLink!=null){
