@@ -72,5 +72,9 @@ public class PrepVerifyActivity extends Activity {
 			message.setVisibility(View.VISIBLE);
 		}
 	}
+	
+	public void getHelp(View v){
+		// open website with explanations of preparations
+	}
 
 }

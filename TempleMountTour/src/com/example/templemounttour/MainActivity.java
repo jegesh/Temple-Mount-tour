@@ -95,15 +95,15 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startTour(View v){ // live tour
+		tourIsLive = true;
 		Intent intent = new Intent(this, PrepVerifyActivity.class);
 		startActivity(intent);
-		tourIsLive = true;
 	}
 	
 	public void startBrowsing(View v){ // offline tour
+		tourIsLive = false;
 		Intent intent = new Intent(this, TouringMapActivity.class);
 		startActivity(intent);
-		tourIsLive = false;
 	}
 	
 

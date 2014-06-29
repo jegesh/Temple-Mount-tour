@@ -1,41 +1,50 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.templemounttour.MainActivity"
+    tools:context="com.example.templemounttour.MainActivity">
+<LinearLayout 
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
     <TextView 
         android:id="@+id/header_main_menu"
         android:layout_width="match_parent"
-       
+        android:textAlignment="center"
         android:text="@string/header_main_menu"
         style="@style/H1"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         />
     <LinearLayout 
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         >
-        <ImageButton
+        <Button
             android:tag="@string/tag_button_live_tour"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/har_habait1"
+            android:drawableTop="@drawable/har_habait1"
+            android:text="@string/button_live_tour"
             android:onClick="startTour"
-            android:contentDescription="@string/tag_button_live_tour" />
-        <ImageButton
+            android:contentDescription="@string/tag_button_live_tour"
+            android:layout_margin="20dp" />
+        <Button
             android:tag="@string/tag_button_offline_tour"
             android:layout_height="wrap_content"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/looking_at_map"
+            android:drawableTop="@drawable/looking_at_map_cropped"
+            android:text="@string/button_offline_tour"
+            android:layout_margin="30dp" 
             android:onClick="startBrowsing"
             android:contentDescription="@string/tag_button_offline_tour" />
         
     </LinearLayout>
     </LinearLayout>
 
+</ScrollView>

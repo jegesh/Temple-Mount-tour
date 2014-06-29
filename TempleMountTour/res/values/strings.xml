@@ -7,21 +7,27 @@
     <string name="header_main_menu">Ascending the Holy Mount</string>
     <string name="tag_button_live_tour">live</string>
     <string name="tag_button_offline_tour">offline</string>
-    <string name="title_activity_prep_verify">PrepVerifyActivity</string>
-    <string name="title_activity_tour_main_menu">TourMainMenuActivity</string>
+    <string name="button_offline_tour">Just browsing</string>
+    <string name="button_live_tour">Going up</string>
+    <string name="title_activity_prep_verify">Preparedness Confirmation</string>
+    <string name="title_activity_tour_main_menu">Tour</string>
     <string name="verification_dunk">I went to the mikve</string>
     <string name="verification_other_preps">I made all necessary preparations</string>
     <string name="verification_no_shoes_etc">I know not to wear shoes or a wallet on the Temple Mount</string>
     <string name="btn_start_tour">I\'m ready, let\'s go!</string>
     <string name="message_unprepared">You\'re not ready!\nYou must complete all the above tasks before ascending the Temple Mount.</string>
-    <string name="title_activity_map">MapActivity</string>
-    <string name="title_activity_offline_map">OfflineMapActivity</string>
+    <string name="title_activity_map">Station Map</string>
     <string name="legal_info">Legal Notices</string>
     <string name="legal_notices_confirmation">OK</string>
     <string name="title_activity_station">StationActivity</string>
     <string name="empty_list_message">No tours have been added for this station</string>
     <string name="title_activity_station_menu">StationMenuActivity</string>
     <string name="title_station_menu">Available Tours</string>
-	<string name="tour_header">You\'re being guided by:</string>
-    
+    <string name="tour_header">You\'re being guided by:</string>
+    <string name="message_gms_connect_fail">We\'re sorry, the app was unable to connect to Google Play Services. Please check that you have a working 
+	    internet connection, and that Google Play Services is enabled.</string>
+    <string name="header_preparation_verification">Have you done all the following?</string>
+    <string name="link_prep_instructions">Help with preparations</string>
+    <string name="title_activity_tour_swipe">TourSwipeActivity</string>
+
 </resources>

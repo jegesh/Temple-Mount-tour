@@ -327,6 +327,7 @@ containing a value of this type.
         public static final int zOrderOnTop=0x7f010010;
     }
     public static final class color {
+        public static final int bright_red=0x7f050017;
         public static final int common_action_bar_splitter=0x7f050009;
         /**  Sign-in Button Colors 
          */
@@ -339,8 +340,9 @@ containing a value of this type.
         public static final int common_signin_btn_light_text_disabled=0x7f050006;
         public static final int common_signin_btn_light_text_focused=0x7f050007;
         public static final int common_signin_btn_light_text_pressed=0x7f050005;
-        public static final int common_signin_btn_text_dark=0x7f050017;
-        public static final int common_signin_btn_text_light=0x7f050018;
+        public static final int common_signin_btn_text_dark=0x7f050019;
+        public static final int common_signin_btn_text_light=0x7f05001a;
+        public static final int hyperlink_blue=0x7f050018;
         public static final int wallet_bright_foreground_disabled_holo_light=0x7f05000f;
         /** 
          Wallet colors to support consistent Wallet fragment holo dark UI in client application
@@ -359,8 +361,8 @@ containing a value of this type.
         public static final int wallet_hint_foreground_holo_light=0x7f050011;
         public static final int wallet_holo_blue_light=0x7f050015;
         public static final int wallet_link_text_light=0x7f050016;
-        public static final int wallet_primary_text_holo_light=0x7f050019;
-        public static final int wallet_secondary_text_holo_dark=0x7f05001a;
+        public static final int wallet_primary_text_holo_light=0x7f05001b;
+        public static final int wallet_secondary_text_holo_dark=0x7f05001c;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -407,8 +409,9 @@ containing a value of this type.
         public static final int ic_plusone_standard_off_client=0x7f02001e;
         public static final int ic_plusone_tall_off_client=0x7f02001f;
         public static final int looking_at_map=0x7f020020;
-        public static final int powered_by_google_dark=0x7f020021;
-        public static final int powered_by_google_light=0x7f020022;
+        public static final int looking_at_map_cropped=0x7f020021;
+        public static final int powered_by_google_dark=0x7f020022;
+        public static final int powered_by_google_light=0x7f020023;
     }
     public static final class id {
         public static final int action_settings=0x7f060024;
@@ -433,12 +436,12 @@ containing a value of this type.
         public static final int monochrome=0x7f060013;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
+        public static final int pager=0x7f06001c;
         public static final int production=0x7f060007;
         public static final int sandbox=0x7f060008;
         public static final int satellite=0x7f060002;
         public static final int selectionDetails=0x7f06000b;
-        public static final int station_fragment_container=0x7f06001b;
-        public static final int station_menu_fragment_container=0x7f06001c;
+        public static final int station_menu_fragment_container=0x7f06001b;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
         public static final int tour_audio=0x7f060022;
@@ -457,9 +460,11 @@ containing a value of this type.
         public static final int activity_map=0x7f030001;
         public static final int activity_prep_verify=0x7f030002;
         public static final int activity_station_menu=0x7f030003;
-        public static final int fragment_station_menu=0x7f030004;
-        public static final int fragment_tour=0x7f030005;
-        public static final int legal_dialog_title=0x7f030006;
+        public static final int activity_tour_swipe=0x7f030004;
+        public static final int fragment_station_menu=0x7f030005;
+        public static final int fragment_tour=0x7f030006;
+        public static final int fragment_tour_swipe=0x7f030007;
+        public static final int legal_dialog_title=0x7f030008;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
@@ -469,6 +474,7 @@ containing a value of this type.
         public static final int station=0x7f0a0004;
         public static final int station_menu=0x7f0a0005;
         public static final int tour_main_menu=0x7f0a0006;
+        public static final int tour_swipe=0x7f0a0007;
     }
     public static final class string {
         public static final int action_settings=0x7f040022;
@@ -479,7 +485,9 @@ containing a value of this type.
         public static final int auth_client_play_services_err_notification_msg=0x7f040004;
         public static final int auth_client_requested_by_msg=0x7f040005;
         public static final int auth_client_using_bad_version_title=0x7f040000;
-        public static final int btn_start_tour=0x7f04002b;
+        public static final int btn_start_tour=0x7f04002d;
+        public static final int button_live_tour=0x7f040027;
+        public static final int button_offline_tour=0x7f040026;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -569,25 +577,28 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f04001e;
-        public static final int empty_list_message=0x7f040032;
+        public static final int empty_list_message=0x7f040033;
         public static final int header_main_menu=0x7f040023;
+        public static final int header_preparation_verification=0x7f040038;
         public static final int hello_world=0x7f040021;
-        public static final int legal_info=0x7f04002f;
-        public static final int legal_notices_confirmation=0x7f040030;
-        public static final int message_unprepared=0x7f04002c;
+        public static final int legal_info=0x7f040030;
+        public static final int legal_notices_confirmation=0x7f040031;
+        public static final int link_prep_instructions=0x7f040039;
+        public static final int message_gms_connect_fail=0x7f040037;
+        public static final int message_unprepared=0x7f04002e;
         public static final int tag_button_live_tour=0x7f040024;
         public static final int tag_button_offline_tour=0x7f040025;
-        public static final int title_activity_map=0x7f04002d;
-        public static final int title_activity_offline_map=0x7f04002e;
-        public static final int title_activity_prep_verify=0x7f040026;
-        public static final int title_activity_station=0x7f040031;
-        public static final int title_activity_station_menu=0x7f040033;
-        public static final int title_activity_tour_main_menu=0x7f040027;
-        public static final int title_station_menu=0x7f040034;
-        public static final int tour_header=0x7f040035;
-        public static final int verification_dunk=0x7f040028;
-        public static final int verification_no_shoes_etc=0x7f04002a;
-        public static final int verification_other_preps=0x7f040029;
+        public static final int title_activity_map=0x7f04002f;
+        public static final int title_activity_prep_verify=0x7f040028;
+        public static final int title_activity_station=0x7f040032;
+        public static final int title_activity_station_menu=0x7f040034;
+        public static final int title_activity_tour_main_menu=0x7f040029;
+        public static final int title_activity_tour_swipe=0x7f04003a;
+        public static final int title_station_menu=0x7f040035;
+        public static final int tour_header=0x7f040036;
+        public static final int verification_dunk=0x7f04002a;
+        public static final int verification_no_shoes_etc=0x7f04002c;
+        public static final int verification_other_preps=0x7f04002b;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
@@ -617,6 +628,8 @@ containing a value of this type.
          */
         public static final int AppBaseTheme=0x7f080004;
         /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+    <item name="android:windowBackground">@drawable/beit_mikdash_bg</item> 
          */
         public static final int AppTheme=0x7f080005;
         /**    <item name="android:textAlignment">center</item> 

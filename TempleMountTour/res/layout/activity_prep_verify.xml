@@ -1,13 +1,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:padding="15dp"
+    tools:context="com.example.templemounttour.PrepVerifyActivity" >
+
 <LinearLayout 
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.templemounttour.PrepVerifyActivity"
+    android:layout_height="wrap_content"
+    
     android:orientation="vertical" >
+
+    <TextView
+        style="@style/H1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/header_preparation_verification"
+        android:textAlignment="center" />
+
 	<CheckBox 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -23,14 +34,29 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:text="@string/verification_no_shoes_etc"/>
-	<Button 
+
+	<Button
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="@string/btn_start_tour"
+	    android:layout_marginTop="25dp"
 	    android:onClick="startTour"
-	    />
+	    android:text="@string/btn_start_tour" />
+
+	<TextView
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:layout_margin="30dp"
+	    android:gravity="center"
+	    android:text="@string/link_prep_instructions"
+	    android:textColor="@color/hyperlink_blue"
+	    android:onClick="getHelp" />
+
 	<TextView 
 	    android:layout_width="match_parent"
+	    android:textColor="@color/bright_red"
+	    android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+	    android:textAlignment="center"
 	    android:layout_height="wrap_content"
 	    android:layout_marginTop="30dp"
 	    android:id="@+id/message_unprepared"

@@ -41,31 +41,33 @@
         </activity>
         <activity
             android:name="com.example.templemounttour.PrepVerifyActivity"
-            android:label="@string/title_activity_prep_verify" >
-        </activity>
-        <activity
-            android:name="com.example.templemounttour.TourMainMenuActivity"
-            android:label="@string/title_activity_tour_main_menu" >
+            android:label="@string/title_activity_prep_verify"
+            android:parentActivityName="android.intent.action.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.templemounttour.MainActivity" />
         </activity>
         <activity
             android:name="com.example.templemounttour.TouringMapActivity"
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="com.example.templemounttour.OfflineMapActivity"
-            android:label="@string/title_activity_offline_map" >
-        </activity>
-        <activity
-            android:name="com.example.templemounttour.StationActivity"
-            android:label="@string/title_activity_station" >
-        </activity>
-        <activity
             android:name="com.example.templemounttour.StationMenuActivity"
             android:label="@string/title_activity_station_menu"
-            android:parentActivityName="com.example.templemounttour.TouringMapActivity" >
+            android:parentActivityName="com.example.templemounttour.TouringMapActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.templemounttour.TouringMapActivity" />
+        </activity>
+        <activity
+            android:name="com.example.templemounttour.TourSwipeActivity"
+            android:label="@string/title_activity_tour_swipe"
+            android:parentActivityName="com.example.templemounttour.StationMenuActivity" 
+            android:screenOrientation="portrait" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.templemounttour.StationMenuActivity" />
         </activity>
     </application>
 

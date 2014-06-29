@@ -14,6 +14,7 @@ import android.os.DropBoxManager.Entry;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -67,9 +68,9 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	
 	@Override
 	protected void onStop() {
+		cameraPos = gMap.getCameraPosition();
 		if(locClient!=null)
 			locClient.disconnect();
-		
 		super.onStop();
 	}
 	
@@ -131,7 +132,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 		
 		for(int i = 0;i<c.getCount();i++){
 			//TODO values need to  be abstracted
-			StationMarker sm = new StationMarker(c.getDouble(2), c.getDouble(3), c.getString(1),this,db); 
+			StationMarker sm = new StationMarker(c.getDouble(2), c.getDouble(3), c.getString(1),db); 
 			stations.put(sm.title, sm);
 			c.moveToNext();
 		}
@@ -148,7 +149,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			
 			@Override
 			public boolean onMarkerClick(Marker m) {
-				cameraPos = gMap.getCameraPosition();
+				
 				Intent intent = new Intent(getBaseContext(), StationMenuActivity.class);
 				intent.putExtra(STATION_NAME, m.getTitle());
 				startActivity(intent);
@@ -161,13 +162,14 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 
 	@Override
 	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
+		Toast.makeText(getBaseContext(), getBaseContext().getString(R.string.message_gms_connect_fail), Toast.LENGTH_SHORT).show();
 		
 	}
 
 
 	@Override
 	public void onConnected(Bundle arg0) {
+		Log.d("is tour live?",Boolean.toString( MainActivity.tourIsLive));
 		if(MainActivity.tourIsLive){
 			youAreHere = locClient.getLastLocation();
 			gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(youAreHere.getLatitude(), youAreHere.getLongitude())));

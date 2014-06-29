@@ -16,25 +16,30 @@
     tools:context="com.example.templemounttour.StationActivity$PlaceholderFragment" >
 
     <TextView
+        style="@style/H1"
         android:id="@+id/tour_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tour_header"
          />
     <TextView
+        style="@style/H1"
         android:id="@+id/tour_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
          />
+    <View style="@style/minorHr"/>
     <LinearLayout android:id="@+id/tour_pic_container"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
     </LinearLayout>
     <TextView 
+        android:layout_marginTop="30dp"
         android:id="@+id/tour_explanation"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"/>
+        android:layout_width="match_parent"
+        style="@android:style/TextAppearance.DeviceDefault.Large"/>
     <MediaController 
         android:id="@+id/tour_audio"
         android:layout_height="wrap_content"

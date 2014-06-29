@@ -1,8 +1,24 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/station_fragment_container"
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/station_menu_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.templemounttour.StationMenuActivity"
-    tools:ignore="MergeRootFrame" />
-
+    android:orientation="vertical">
+	<TextView 
+	    style="@style/H1"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/title_station_menu"
+	    /> 
+	<ListView 
+	    android:background="@android:color/background_light"
+	    android:id="@android:id/list"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    />
+	<TextView android:id="@android:id/empty"
+		    android:layout_height="wrap_content"
+		    android:layout_width="match_parent"
+		    android:text="@string/empty_list_message"
+		    style="@style/H1"/>
+</LinearLayout>
