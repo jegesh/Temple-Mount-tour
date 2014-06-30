@@ -1,6 +1,7 @@
 package com.example.templemounttour;
 
 import java.io.File;
+import java.util.Currency;
 import java.util.HashMap;
 
 import android.app.Activity;
@@ -14,6 +15,8 @@ import android.os.DropBoxManager.Entry;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -42,18 +45,19 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	static HashMap<String, StationMarker> stations;
 	SQLiteDatabase db;
 	static CameraPosition cameraPos;
+	boolean lastTourType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
-		getActionBar().hide();
+		//getActionBar().hide();
+		
 		AppDBHelper helper = new AppDBHelper(this);
 		helper.openDataBase();
 		db = new AppDBHelper(this).getReadableDatabase();
 		db = helper.db;
 			
-		
 /*		int viewerHeight = this.getWindow().getAttributes().height;
 		mView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, viewerHeight-60));
 		mView.onCreate(savedInstanceState);
@@ -76,7 +80,6 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	
 	@Override
 	protected void onDestroy() {
-		db.close();
 		super.onDestroy();
 	}
 	
@@ -87,9 +90,10 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			gMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_container)).getMap();
 			
 			locClient = new LocationClient(this, this, this);
-			// initialize database
 			setStations();
 			placeMarkers();
+			if(lastTourType!=MainActivity.tourIsLive && locClient.isConnected())
+				locClient.disconnect();
 			locClient.connect();
 			gMap.setMyLocationEnabled(true);
 		}
@@ -104,7 +108,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-	//	getMenuInflater().inflate(R.menu.map, menu);
+		getMenuInflater().inflate(R.menu.map, menu);
 		return true;
 	}
 
@@ -114,10 +118,31 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch (id) {
+		case R.id.toggle_normal:
+			toggleToNormal();
 			return true;
+		case R.id.toggle_satellite:
+			toggleToSatellite();
+			return true;
+
+		default:
+			return false;
 		}
-		return super.onOptionsItemSelected(item);
+	}
+	
+	public void toggleToSatellite(){
+		int type = gMap.getMapType();
+		if(type != GoogleMap.MAP_TYPE_SATELLITE)
+			gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+		
+	}
+	
+	public void toggleToNormal(){
+		int type = gMap.getMapType();
+		if(type == GoogleMap.MAP_TYPE_SATELLITE)
+			gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		
 	}
 	
 	private void setStations(){
@@ -137,6 +162,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			c.moveToNext();
 		}
 		c.close();
+		db.close();
 		Log.d("Help me", "No. of entries: "+stations.size());
 	}
 	
@@ -169,6 +195,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 
 	@Override
 	public void onConnected(Bundle arg0) {
+		lastTourType = MainActivity.tourIsLive;
 		Log.d("is tour live?",Boolean.toString( MainActivity.tourIsLive));
 		if(MainActivity.tourIsLive){
 			youAreHere = locClient.getLastLocation();

@@ -4,47 +4,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.templemounttour.MainActivity">
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+    <TextView
+        android:id="@+id/header_main_menu"
+        style="@style/H1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/header_main_menu"
+        android:textAlignment="center"
+         />
+    
 <LinearLayout 
     android:id="@+id/container"
+    android:baselineAligned="false"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
+    android:gravity="center"
     >
-    <TextView 
-        android:id="@+id/header_main_menu"
-        android:layout_width="match_parent"
-        android:textAlignment="center"
-        android:text="@string/header_main_menu"
-        style="@style/H1"
-        android:layout_height="60dp"
-        />
+        <LinearLayout 
+                    android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+            >
+
+        <ImageView
+            android:id="@+id/btn_live_tour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/tag_button_live_tour"
+            android:onClick="startTour"
+            android:scaleType="fitCenter"
+            android:src="@drawable/har_habait1"
+            android:tag="@string/tag_button_live_tour" />
+
+        	<TextView 
+            android:layout_width="wrap_content"
+        	android:textSize="22sp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/button_live_tour"/>
+        </LinearLayout>
     <LinearLayout 
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         >
-        <Button
-            android:tag="@string/tag_button_live_tour"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/har_habait1"
-            android:text="@string/button_live_tour"
-            android:onClick="startTour"
-            android:contentDescription="@string/tag_button_live_tour"
-            android:layout_margin="20dp" />
-        <Button
+    
+        <ImageView
             android:tag="@string/tag_button_offline_tour"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/looking_at_map_cropped"
-            android:text="@string/button_offline_tour"
-            android:layout_margin="30dp" 
+            android:layout_width="match_parent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/looking_at_map_cropped"
+            android:id="@+id/btn_offline_tour"
             android:onClick="startBrowsing"
             android:contentDescription="@string/tag_button_offline_tour" />
-        
+        <TextView 
+            android:layout_width="wrap_content"
+            android:textSize="22sp"
+            android:textAlignment="center"
+            android:id="@+id/txt_offline_tour"
+            android:layout_height="wrap_content"
+            android:text="@string/button_offline_tour"/>
     </LinearLayout>
     </LinearLayout>
-
+</LinearLayout>
 </ScrollView>

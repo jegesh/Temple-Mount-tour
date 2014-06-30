@@ -42,7 +42,8 @@ public class TourSwipeActivity extends FragmentActivity {
         tourPagerAdapter =
                 new ToursPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(tourPagerAdapter);
+       	mViewPager.setAdapter(tourPagerAdapter);
+        
     }
 
 
@@ -57,6 +58,7 @@ public class ToursPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public android.support.v4.app.Fragment getItem(int i) {
+    	Log.d("We're here", "In the getItem method");
         android.support.v4.app.Fragment fragment = new TourSwipeFragment();
         Bundle args = new Bundle();
         String tName =  titles[i];
@@ -114,9 +116,10 @@ public static class TourSwipeFragment extends android.support.v4.app.Fragment{
 		if(b.getStringArray(ToursPagerAdapter.PIC_LINKS)!=null){
 			for(String link:b.getStringArray(ToursPagerAdapter.PIC_LINKS)){
 				ImageView iv = new ImageView(getActivity());
-				android.widget.LinearLayout.LayoutParams ivParams =   new android.widget.LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+				android.widget.LinearLayout.LayoutParams ivParams =   new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
 	//			ivParams = Gravity.CENTER;
 				ivParams.topMargin = 40;
+				ivParams.weight=1;
 				
 				iv.setLayoutParams(ivParams);
 				iv.setScaleType(ImageView.ScaleType.FIT_CENTER);

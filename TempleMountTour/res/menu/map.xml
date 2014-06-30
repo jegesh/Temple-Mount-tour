@@ -2,10 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.templemounttour.MapActivity" >
 
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
-
+   <item android:id="@+id/toggle_satellite"
+       android:title="@string/map_menu_satellite"
+       android:showAsAction="withText"
+       />
+   <item android:id="@+id/toggle_normal"
+       android:title="@string/map_menu_normal"
+       android:showAsAction="withText"
+       />
 </menu>
