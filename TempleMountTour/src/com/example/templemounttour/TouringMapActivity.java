@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -44,7 +45,10 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	LocationClient locClient;
 	static HashMap<String, StationMarker> stations;
 	SQLiteDatabase db;
+	private ConnectionResult connectionResult;
+	private static float lastZoom;
 	static CameraPosition cameraPos;
+	static 
 	boolean lastTourType;
 
 	@Override
@@ -73,6 +77,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	@Override
 	protected void onStop() {
 		cameraPos = gMap.getCameraPosition();
+		lastZoom = gMap.getCameraPosition().zoom;
 		if(locClient!=null)
 			locClient.disconnect();
 		super.onStop();
@@ -95,7 +100,8 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			if(lastTourType!=MainActivity.tourIsLive && locClient.isConnected())
 				locClient.disconnect();
 			locClient.connect();
-			gMap.setMyLocationEnabled(true);
+			if(lastTourType==MainActivity.tourIsLive)
+				gMap.setMyLocationEnabled(true);
 		}
 		else{
 			Dialog d = GooglePlayServicesUtil.getErrorDialog(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, CONNECTION_FAILURE_RESOLUTION_REQUEST); // need to find request code
@@ -104,6 +110,86 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 		super.onResume();
 	}
 
+	// Define a DialogFragment that displays the error dialog
+    public static class ErrorDialogFragment extends DialogFragment {
+        // Global field to contain the error dialog
+        private Dialog mDialog;
+        // Default constructor. Sets the dialog field to null
+        public ErrorDialogFragment() {
+            super();
+            mDialog = null;
+        }
+        // Set the dialog to display
+        public void setDialog(Dialog dialog) {
+            mDialog = dialog;
+        }
+        // Return a Dialog to the DialogFragment.
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            return mDialog;
+        }
+    }
+    
+    /*
+     * Handle results returned to the FragmentActivity
+     * by Google Play services
+     */
+    @Override
+    protected void onActivityResult(
+            int requestCode, int resultCode, Intent data) {
+        // Decide what to do based on the original request code
+        switch (requestCode) {
+            case CONNECTION_FAILURE_RESOLUTION_REQUEST :
+            /*
+             * If the result code is Activity.RESULT_OK, try
+             * to connect again
+             */
+                switch (resultCode) {
+                    case Activity.RESULT_OK :
+                    /*
+                     * Try the request again
+                     */
+                    break;
+                }
+        }
+     }
+
+    private boolean servicesConnected() {
+        // Check that Google Play services is available
+        int resultCode =
+                GooglePlayServicesUtil.
+                        isGooglePlayServicesAvailable(this);
+        // If Google Play services is available
+        if (ConnectionResult.SUCCESS == resultCode) {
+            // In debug mode, log the status
+            Log.d("Location Updates",
+                    "Google Play services is available.");
+            // Continue
+            return true;
+        // Google Play services was not available for some reason
+        } else {
+            // Get the error code
+            int errorCode = connectionResult.getErrorCode();
+            // Get the error dialog from Google Play services
+            Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
+                    errorCode,
+                    this,
+                    CONNECTION_FAILURE_RESOLUTION_REQUEST);
+
+            // If Google Play services can provide an error dialog
+            if (errorDialog != null) {
+                // Create a new DialogFragment for the error dialog
+                ErrorDialogFragment errorFragment =
+                        new ErrorDialogFragment();
+                // Set the dialog in the DialogFragment
+                errorFragment.setDialog(errorDialog);
+                // Show the error dialog in the DialogFragment
+                errorFragment.show(getFragmentManager(),
+                        "Location Updates");
+            }
+        }
+    }
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -201,13 +287,16 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			youAreHere = locClient.getLastLocation();
 			gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(youAreHere.getLatitude(), youAreHere.getLongitude())));
 		}else{
-			if(cameraPos!=null)
+			if(cameraPos!=null){
 				gMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPos));
-			else
+				gMap.moveCamera(CameraUpdateFactory.zoomTo(lastZoom));
+			}
+			else{
 				gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(INITIAL_LATITUDE,INITIAL_LONGITUDE)));
+				gMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+			}
 		}
 		gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		gMap.moveCamera(CameraUpdateFactory.zoomTo(17));
 		
 	}
 
