@@ -45,151 +45,75 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	LocationClient locClient;
 	static HashMap<String, StationMarker> stations;
 	SQLiteDatabase db;
-	private ConnectionResult connectionResult;
+	
 	private static float lastZoom;
 	static CameraPosition cameraPos;
-	static 
-	boolean lastTourType;
+	static boolean lastTourType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
-		//getActionBar().hide();
 		
 		AppDBHelper helper = new AppDBHelper(this);
 		helper.openDataBase();
-		db = new AppDBHelper(this).getReadableDatabase();
 		db = helper.db;
 			
-/*		int viewerHeight = this.getWindow().getAttributes().height;
-		mView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, viewerHeight-60));
-		mView.onCreate(savedInstanceState);
-	*/	
 	}
 	
 	@Override
 	protected void onStart() {
 		super.onStart();
-		
+				
 	}
 	
 	@Override
 	protected void onStop() {
+		Log.d("Map message", "In onStop");
+		lastTourType = MainActivity.tourIsLive;
 		cameraPos = gMap.getCameraPosition();
 		lastZoom = gMap.getCameraPosition().zoom;
 		if(locClient!=null)
 			locClient.disconnect();
+		if(!locClient.isConnected())
+			Log.d("Map message", "Location client disengaged");
+	//	locClient = null;
 		super.onStop();
 	}
 	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		db.close();
+	//	locClient.disconnect();
 	}
 	
 	@Override
 	protected void onResume() {
-		if(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this)==CommonStatusCodes.SUCCESS){
-			
-			gMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_container)).getMap();
-			
+	
+		super.onResume();
+		ServicesAvailabilityHelper saHelper = new ServicesAvailabilityHelper(this);
+		if(saHelper.allServicesConnected()){
+			if(gMap == null)
+				gMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map_container)).getMap();
 			locClient = new LocationClient(this, this, this);
 			setStations();
 			placeMarkers();
-			if(lastTourType!=MainActivity.tourIsLive && locClient.isConnected())
-				locClient.disconnect();
+	//		if(lastTourType!=MainActivity.tourIsLive && locClient.isConnected())
+	//			locClient.disconnect();
 			locClient.connect();
-			if(lastTourType==MainActivity.tourIsLive)
+			if(MainActivity.tourIsLive)
 				gMap.setMyLocationEnabled(true);
+		}else{
+			setContentView(R.layout.no_map_error_layout);
+			saHelper.frag.show(getFragmentManager(), "Location Updates");
+			
 		}
-		else{
-			Dialog d = GooglePlayServicesUtil.getErrorDialog(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this), this, CONNECTION_FAILURE_RESOLUTION_REQUEST); // need to find request code
-			d.show();
-		}
-		super.onResume();
+	//	super.onResume();
+		
 	}
-
-	// Define a DialogFragment that displays the error dialog
-    public static class ErrorDialogFragment extends DialogFragment {
-        // Global field to contain the error dialog
-        private Dialog mDialog;
-        // Default constructor. Sets the dialog field to null
-        public ErrorDialogFragment() {
-            super();
-            mDialog = null;
-        }
-        // Set the dialog to display
-        public void setDialog(Dialog dialog) {
-            mDialog = dialog;
-        }
-        // Return a Dialog to the DialogFragment.
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            return mDialog;
-        }
-    }
     
-    /*
-     * Handle results returned to the FragmentActivity
-     * by Google Play services
-     */
-    @Override
-    protected void onActivityResult(
-            int requestCode, int resultCode, Intent data) {
-        // Decide what to do based on the original request code
-        switch (requestCode) {
-            case CONNECTION_FAILURE_RESOLUTION_REQUEST :
-            /*
-             * If the result code is Activity.RESULT_OK, try
-             * to connect again
-             */
-                switch (resultCode) {
-                    case Activity.RESULT_OK :
-                    /*
-                     * Try the request again
-                     */
-                    break;
-                }
-        }
-     }
 
-    private boolean servicesConnected() {
-        // Check that Google Play services is available
-        int resultCode =
-                GooglePlayServicesUtil.
-                        isGooglePlayServicesAvailable(this);
-        // If Google Play services is available
-        if (ConnectionResult.SUCCESS == resultCode) {
-            // In debug mode, log the status
-            Log.d("Location Updates",
-                    "Google Play services is available.");
-            // Continue
-            return true;
-        // Google Play services was not available for some reason
-        } else {
-            // Get the error code
-            int errorCode = connectionResult.getErrorCode();
-            // Get the error dialog from Google Play services
-            Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-                    errorCode,
-                    this,
-                    CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
-            // If Google Play services can provide an error dialog
-            if (errorDialog != null) {
-                // Create a new DialogFragment for the error dialog
-                ErrorDialogFragment errorFragment =
-                        new ErrorDialogFragment();
-                // Set the dialog in the DialogFragment
-                errorFragment.setDialog(errorDialog);
-                // Show the error dialog in the DialogFragment
-                errorFragment.show(getFragmentManager(),
-                        "Location Updates");
-            }
-        }
-    }
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -248,7 +172,6 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			c.moveToNext();
 		}
 		c.close();
-		db.close();
 		Log.d("Help me", "No. of entries: "+stations.size());
 	}
 	
@@ -281,19 +204,25 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 
 	@Override
 	public void onConnected(Bundle arg0) {
-		lastTourType = MainActivity.tourIsLive;
+	//	lastTourType = MainActivity.tourIsLive;
 		Log.d("is tour live?",Boolean.toString( MainActivity.tourIsLive));
 		if(MainActivity.tourIsLive){
-			youAreHere = locClient.getLastLocation();
+			gMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+			Location l = null;
+			while(l==null){
+				youAreHere = locClient.getLastLocation();
+				l=youAreHere;
+			}
 			gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(youAreHere.getLatitude(), youAreHere.getLongitude())));
+			
 		}else{
-			if(cameraPos!=null){
-				gMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPos));
+			if(cameraPos!=null && lastTourType==MainActivity.tourIsLive){
 				gMap.moveCamera(CameraUpdateFactory.zoomTo(lastZoom));
+				gMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPos));
 			}
 			else{
-				gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(INITIAL_LATITUDE,INITIAL_LONGITUDE)));
 				gMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+				gMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(INITIAL_LATITUDE,INITIAL_LONGITUDE)));
 			}
 		}
 		gMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);

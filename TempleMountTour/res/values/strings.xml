@@ -28,7 +28,11 @@
     <string name="header_preparation_verification">האם עשיתם את כל ההכנות?</string>
     <string name="link_prep_instructions">עזרה עם הכנות לעלייה</string>
     <string name="title_activity_tour_swipe">הדרכות</string>
-	<string name="map_menu_satellite">מפת לווין</string>
-	<string name="map_menu_normal">מפה רגילה</string>
-    
+    <string name="map_menu_satellite">מפת לווין</string>
+    <string name="map_menu_normal">מפה רגילה</string>
+    <string name="message_location_services_failure">לא הצליח להתחבר למיקום המכשיר. יש לאפשר מעקב של מיקום במכשיר, או לעשות סיור וירטואלי.</string>
+    <string name="message_error">שגיאה</string>
+    <string name="message_google_play_failure">לא הצליח להתחבר ל-Google Maps. יש לבדוק אם שירותי Google Play מאופשרים.</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+
 </resources>

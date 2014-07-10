@@ -26,6 +26,7 @@ public class TourSwipeActivity extends FragmentActivity {
     StationMarker station;
     SQLiteDatabase db;
     String[] titles;
+    boolean firstTab;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +44,13 @@ public class TourSwipeActivity extends FragmentActivity {
                 new ToursPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
        	mViewPager.setAdapter(tourPagerAdapter);
-        
+       	firstTab = true;
+    }
+    
+    @Override
+    protected void onResume() {
+    	
+    	super.onResume();
     }
 
 
@@ -55,6 +62,16 @@ public class ToursPagerAdapter extends FragmentStatePagerAdapter {
 	public ToursPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+	
+	@Override
+	public void setPrimaryItem(ViewGroup container, int position, Object object) {
+		if(firstTab){
+			android.support.v4.app.Fragment f = getItem(TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0));
+			firstTab = false;
+			super.setPrimaryItem(container, TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0), f);
+		}else
+			super.setPrimaryItem(container, position, object);
+	};
 
     @Override
     public android.support.v4.app.Fragment getItem(int i) {

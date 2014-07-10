@@ -7,7 +7,7 @@
     <string name="header_main_menu">Ascending the Holy Mount</string>
     <string name="tag_button_live_tour">live</string>
     <string name="tag_button_offline_tour">offline</string>
-    <string name="button_offline_tour">Just browsing</string>
+    <string name="button_offline_tour">Virtual Tour</string>
     <string name="button_live_tour">Going up</string>
     <string name="title_activity_prep_verify">Preparedness Confirmation</string>
     <string name="title_activity_tour_main_menu">Tour</string>
@@ -31,5 +31,7 @@
     <string name="title_activity_tour_swipe">TourSwipeActivity</string>
 	<string name="map_menu_satellite">Satellite</string>
 	<string name="map_menu_normal">Regular</string>
-    
+    <string name="message_location_services_failure">Unable to connect to device location. Please enable locations in the device, or choose \'Virtual Tour\'</string>
+    <string name="message_error">Error</string>
+    <string name="message_google_play_failure">Unable to connect to Google Maps. Please make sure Google Play Services are turned on for your device.</string>
 </resources>

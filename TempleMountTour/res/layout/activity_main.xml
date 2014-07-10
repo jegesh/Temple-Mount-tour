@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:scaleType="fitCenter"
-            android:src="@drawable/looking_at_map_cropped"
+            android:src="@drawable/ic_map"
             android:id="@+id/btn_offline_tour"
             android:onClick="startBrowsing"
             android:contentDescription="@string/tag_button_offline_tour" />

@@ -36,19 +36,25 @@ public class StationMenuActivity extends ListActivity {
 	public static StationMarker station;
 	public static SQLiteDatabase db;
 	private String[] tourTitles;
-	String currentStationTitle;
+	static String currentStationTitle;
 	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_station_menu);
+		
+	}
+	
+	@Override
+	protected void onStart() {
 		String title = "";
 		if(getIntent().hasExtra(TouringMapActivity.STATION_NAME))
 			title = getIntent().getStringExtra(TouringMapActivity.STATION_NAME);
 		else
 			title = currentStationTitle;
 		setTitle(title);
+		currentStationTitle = title;
 		AppDBHelper helper = new AppDBHelper(this);
 		helper.openDataBase();
 		db = helper.db;
@@ -71,9 +77,8 @@ public class StationMenuActivity extends ListActivity {
 				openTour(tourTitle, StationMenuActivity.station,position);
 			}
 		});
-		currentStationTitle = title;
-		
-
+			
+		super.onStart();
 	}
 
 	@Override
