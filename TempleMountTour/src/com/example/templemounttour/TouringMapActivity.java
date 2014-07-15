@@ -1,31 +1,21 @@
 package com.example.templemounttour;
 
-import java.io.File;
-import java.util.Currency;
 import java.util.HashMap;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.DropBoxManager.Entry;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.location.LocationClient;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -37,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class TouringMapActivity extends Activity  implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener {
 	public static final String STATION_NAME = "station name";
-	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 	public static final double INITIAL_LATITUDE = 31.777358;
 	public static final double INITIAL_LONGITUDE = 35.235343;
 	GoogleMap gMap;
@@ -85,7 +74,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 	protected void onDestroy() {
 		super.onDestroy();
 		db.close();
-	//	locClient.disconnect();
+	
 	}
 	
 	@Override
@@ -99,8 +88,6 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 			locClient = new LocationClient(this, this, this);
 			setStations();
 			placeMarkers();
-	//		if(lastTourType!=MainActivity.tourIsLive && locClient.isConnected())
-	//			locClient.disconnect();
 			locClient.connect();
 			if(MainActivity.tourIsLive)
 				gMap.setMyLocationEnabled(true);
@@ -204,7 +191,7 @@ public class TouringMapActivity extends Activity  implements GooglePlayServicesC
 
 	@Override
 	public void onConnected(Bundle arg0) {
-	//	lastTourType = MainActivity.tourIsLive;
+	
 		Log.d("is tour live?",Boolean.toString( MainActivity.tourIsLive));
 		if(MainActivity.tourIsLive){
 			gMap.moveCamera(CameraUpdateFactory.zoomTo(17));

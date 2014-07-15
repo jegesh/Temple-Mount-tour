@@ -401,24 +401,26 @@ containing a value of this type.
         public static final int common_signin_btn_text_normal_light=0x7f020016;
         public static final int common_signin_btn_text_pressed_dark=0x7f020017;
         public static final int common_signin_btn_text_pressed_light=0x7f020018;
-        public static final int gray_gradient_rect_bg=0x7f020019;
-        public static final int har_habait1=0x7f02001a;
-        public static final int ic_beit_mikdash=0x7f02001b;
-        public static final int ic_launcher=0x7f02001c;
-        public static final int ic_logo=0x7f02001d;
-        public static final int ic_map=0x7f02001e;
-        public static final int ic_plusone_medium_off_client=0x7f02001f;
-        public static final int ic_plusone_small_off_client=0x7f020020;
-        public static final int ic_plusone_standard_off_client=0x7f020021;
-        public static final int ic_plusone_tall_off_client=0x7f020022;
-        public static final int looking_at_map=0x7f020023;
-        public static final int looking_at_map_cropped=0x7f020024;
-        public static final int powered_by_google_dark=0x7f020025;
-        public static final int powered_by_google_light=0x7f020026;
-        public static final int scroll_map=0x7f020027;
+        public static final int glass=0x7f020019;
+        public static final int gray_gradient_rect_bg=0x7f02001a;
+        public static final int har_habait1=0x7f02001b;
+        public static final int ic_beit_mikdash=0x7f02001c;
+        public static final int ic_launcher=0x7f02001d;
+        public static final int ic_logo=0x7f02001e;
+        public static final int ic_map=0x7f02001f;
+        public static final int ic_plusone_medium_off_client=0x7f020020;
+        public static final int ic_plusone_small_off_client=0x7f020021;
+        public static final int ic_plusone_standard_off_client=0x7f020022;
+        public static final int ic_plusone_tall_off_client=0x7f020023;
+        public static final int looking_at_map=0x7f020024;
+        public static final int looking_at_map_cropped=0x7f020025;
+        public static final int powered_by_google_dark=0x7f020026;
+        public static final int powered_by_google_light=0x7f020027;
+        public static final int scroll_map=0x7f020028;
+        public static final int smokey_glass=0x7f020029;
     }
     public static final class id {
-        public static final int action_settings=0x7f060029;
+        public static final int action_settings=0x7f06002b;
         public static final int book_now=0x7f060010;
         public static final int btn_live_tour=0x7f060016;
         public static final int btn_offline_tour=0x7f060017;
@@ -435,7 +437,9 @@ containing a value of this type.
         public static final int holo_dark=0x7f060005;
         public static final int holo_light=0x7f060006;
         public static final int hybrid=0x7f060004;
-        public static final int legal_info=0x7f060026;
+        public static final int image_dialog=0x7f060021;
+        public static final int image_dialog_frame=0x7f060020;
+        public static final int legal_info=0x7f060028;
         public static final int map_container=0x7f060019;
         public static final int match_parent=0x7f06000c;
         public static final int message_unprepared=0x7f06001d;
@@ -450,14 +454,14 @@ containing a value of this type.
         public static final int station_menu_fragment_container=0x7f06001e;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
-        public static final int toggle_normal=0x7f060028;
-        public static final int toggle_satellite=0x7f060027;
-        public static final int tour_audio=0x7f060025;
-        public static final int tour_explanation=0x7f060024;
-        public static final int tour_fragment_container=0x7f060020;
-        public static final int tour_header=0x7f060021;
-        public static final int tour_pic_container=0x7f060023;
-        public static final int tour_title=0x7f060022;
+        public static final int toggle_normal=0x7f06002a;
+        public static final int toggle_satellite=0x7f060029;
+        public static final int tour_audio=0x7f060027;
+        public static final int tour_explanation=0x7f060026;
+        public static final int tour_fragment_container=0x7f060022;
+        public static final int tour_header=0x7f060023;
+        public static final int tour_pic_container=0x7f060025;
+        public static final int tour_title=0x7f060024;
         public static final int txt_offline_tour=0x7f060018;
         public static final int wrap_content=0x7f06000d;
     }
@@ -471,12 +475,13 @@ containing a value of this type.
         public static final int activity_splash_screen=0x7f030003;
         public static final int activity_station_menu=0x7f030004;
         public static final int activity_tour_swipe=0x7f030005;
-        public static final int fragment_station_menu=0x7f030006;
-        public static final int fragment_tour=0x7f030007;
-        public static final int google_play_failure_dialog=0x7f030008;
-        public static final int legal_dialog_title=0x7f030009;
-        public static final int location_error_dialog=0x7f03000a;
-        public static final int no_map_error_layout=0x7f03000b;
+        public static final int fragment_image_dialog=0x7f030006;
+        public static final int fragment_station_menu=0x7f030007;
+        public static final int fragment_tour=0x7f030008;
+        public static final int google_play_failure_dialog=0x7f030009;
+        public static final int legal_dialog_title=0x7f03000a;
+        public static final int location_error_dialog=0x7f03000b;
+        public static final int no_map_error_layout=0x7f03000c;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

@@ -4,7 +4,10 @@ import com.androidquery.AQuery;
 import com.example.templemounttour.TourSwipeActivity.ToursPagerAdapter;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -27,11 +30,12 @@ public class TourSwipeActivity extends FragmentActivity {
     SQLiteDatabase db;
     String[] titles;
     boolean firstTab;
+    android.app.FragmentManager fragMan;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour_swipe);
-        
+        fragMan = getFragmentManager();
         db = new AppDBHelper(this).getReadableDatabase();
         station = new StationMarker(getIntent().getStringExtra(StationMenuActivity.STATION_TITLE), db);
         station.populateTours(this);
@@ -40,16 +44,26 @@ public class TourSwipeActivity extends FragmentActivity {
         titles = getIntent().getStringArrayExtra(StationMenuActivity.TOUR_TITLES);
         // ViewPager and its adapters use support library
         // fragments, so use getSupportFragmentManager.
-        tourPagerAdapter =
+        
+    }
+    
+    @Override
+    protected void onStart() {
+    	tourPagerAdapter =
                 new ToursPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
        	mViewPager.setAdapter(tourPagerAdapter);
-       	firstTab = true;
+       	if(firstTab = true){
+       		mViewPager.setCurrentItem(this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0));
+       		firstTab = false;
+       	}
+    	super.onStart();
+    	
     }
     
     @Override
     protected void onResume() {
-    	
+    
     	super.onResume();
     }
 
@@ -62,16 +76,17 @@ public class ToursPagerAdapter extends FragmentStatePagerAdapter {
 	public ToursPagerAdapter(FragmentManager fm) {
         super(fm);
     }
-	
+	/*
 	@Override
 	public void setPrimaryItem(ViewGroup container, int position, Object object) {
 		if(firstTab){
+			Log.d("setPrimaryItem method", "First Tab is true, index is: "+TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0));
 			android.support.v4.app.Fragment f = getItem(TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0));
 			firstTab = false;
-			super.setPrimaryItem(container, TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0), f);
+			super.setPrimaryItem(container, TourSwipeActivity.this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0), object);
 		}else
 			super.setPrimaryItem(container, position, object);
-	};
+	}; */
 
     @Override
     public android.support.v4.app.Fragment getItem(int i) {
@@ -110,7 +125,7 @@ public class ToursPagerAdapter extends FragmentStatePagerAdapter {
 
 
 public static class TourSwipeFragment extends android.support.v4.app.Fragment{
-	
+	String picLink;
 	
 	public TourSwipeFragment(){
 		
@@ -137,7 +152,7 @@ public static class TourSwipeFragment extends android.support.v4.app.Fragment{
 	//			ivParams = Gravity.CENTER;
 				ivParams.topMargin = 40;
 				ivParams.weight=1;
-				
+				ivParams.setMargins(15, 15, 15, 10);
 				iv.setLayoutParams(ivParams);
 				iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
 				AQuery aq = new AQuery(getActivity(), v);
@@ -145,6 +160,22 @@ public static class TourSwipeFragment extends android.support.v4.app.Fragment{
 				iv.setId(ivId);
 				llContainer.addView(iv);
 				aq.id(ivId).image(link);
+				picLink = link;
+				iv.setTag(link);
+				iv.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						String link = (String)v.getTag();
+						ImageDialog dialog = new ImageDialog(link);
+						
+						dialog.show(getFragmentManager(), "image");
+						//dialog.getDialog().getWindow().setBackgroundDrawableResource(R.drawable.glass);
+						
+						
+						
+					}
+				});
 				
 			}
 		}/*
