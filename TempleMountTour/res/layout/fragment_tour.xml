@@ -14,6 +14,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:id="@+id/fragment_swipe_container"
+    android:layout_gravity="center_horizontal"
     tools:context="com.example.templemounttour.StationActivity$PlaceholderFragment" >
 
     <TextView
@@ -43,12 +44,23 @@
         >
     </LinearLayout>
   	</HorizontalScrollView>
-  	<LinearLayout
+  	<WebView 
+        android:layout_height="150dp"
+        android:layout_width="match_parent"
+        android:id="@+id/audio_webview"
+        android:visibility="gone"
+        android:layout_marginTop="25dp"/>
+    <TextView 
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:id="@+id/audio_container"
-        android:orientation="horizontal">
-    </LinearLayout>
+        android:textAlignment="center"
+        android:id="@+id/video_link"
+        style="@style/Hyperlink"
+        android:onClick="playVideo"
+        android:visibility="gone"
+        android:textSize="18sp"
+        android:layout_marginTop="20dp"
+        android:clickable="true"/>
     <TextView 
         android:layout_marginTop="30dp"
         android:id="@+id/tour_explanation"
@@ -57,14 +69,5 @@
         style="@android:style/TextAppearance.DeviceDefault.Large"/>
    
     
-    <TextView 
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/video_link"
-        style="@style/Hyperlink"
-        android:onClick="playVideo"
-        android:visibility="gone"/>
-    
- 
 </LinearLayout>
 </ScrollView>

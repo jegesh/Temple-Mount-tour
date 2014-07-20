@@ -34,4 +34,9 @@
     <string name="message_location_services_failure">Unable to connect to device location. Please enable locations in the device, or choose \'Virtual Tour\'</string>
     <string name="message_error">Error</string>
     <string name="message_google_play_failure">Unable to connect to Google Maps. Please make sure Google Play Services are turned on for your device.</string>
+	<string name="video_link">Click for video</string>
+	<string name="no_video_error">No video app installed</string>
+		<string name="error">Error: </string>
+	
+	
 </resources>

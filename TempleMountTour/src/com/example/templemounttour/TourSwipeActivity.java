@@ -10,11 +10,14 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.util.Log;
@@ -31,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.MediaController.MediaPlayerControl;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidquery.AQuery;
 
@@ -60,10 +64,10 @@ public class TourSwipeActivity extends FragmentActivity {
     
     @Override
     protected void onStart() {
-    	tourPagerAdapter =
-                new ToursPagerAdapter(getSupportFragmentManager());
+    	tourPagerAdapter = new ToursPagerAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.pager);
        	mViewPager.setAdapter(tourPagerAdapter);
+       	
        	if(firstTab = true){
        		mViewPager.setCurrentItem(this.getIntent().getIntExtra(StationMenuActivity.TOUR_INDEX, 0));
        		firstTab = false;
@@ -72,12 +76,21 @@ public class TourSwipeActivity extends FragmentActivity {
     	
     }
     
-    @Override
-    protected void onResume() {
-    
-    	super.onResume();
-    }
-
+    public void playVideo(View v){
+		Log.d("Activity video", "trying to play: ");
+		String vidLink = (String)v.getTag();
+		Intent intent = new Intent( Intent.ACTION_VIEW);
+		try {
+			intent.setData(Uri.parse(vidLink));
+		} catch (Exception e) {
+			Toast.makeText(this, R.string.error+e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
+		if (intent.resolveActivity(getPackageManager()) != null) {
+	        startActivity(intent);
+	    } 
+		else
+			Toast.makeText(this, R.string.no_video_error, Toast.LENGTH_SHORT).show();
+	}
 
 public class ToursPagerAdapter extends FragmentStatePagerAdapter {
     public static final String PIC_LINKS = "pic links";
@@ -142,28 +155,72 @@ public class ToursPagerAdapter extends FragmentStatePagerAdapter {
 public static class TourSwipeFragment extends android.support.v4.app.Fragment{
 	String picLink;
 	MediaPlayer mPlayer;
-	private MediaController mController;
 	String videoLink;
 	
 	public TourSwipeFragment(){
 		
 	}
 	
+		
 	@Override
-	public void onDestroyView() {
-		if(mPlayer!=null){
-			mPlayer.release();
-			mPlayer = null;
+	public void onResume() {
+		Bundle b = getArguments();
+		LinearLayout llContainer = (LinearLayout)getView().findViewById(R.id.tour_pic_container);
+		if(b.getString(ToursPagerAdapter.STATION_TEXT)!=null)
+			((TextView)getView().findViewById(R.id.tour_explanation)).setText(b.getString(ToursPagerAdapter.STATION_TEXT));
+		if(b.getStringArray(ToursPagerAdapter.PIC_LINKS)!=null){
+			for(String link:b.getStringArray(ToursPagerAdapter.PIC_LINKS)){
+				if(link.length()>10){
+					ImageView iv = new ImageView(getActivity());
+					android.widget.LinearLayout.LayoutParams ivParams =   new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
+					//			ivParams = Gravity.CENTER;
+					ivParams.topMargin = 40;
+					ivParams.weight=1;
+					ivParams.setMargins(15, 15, 15, 10);
+					iv.setLayoutParams(ivParams);
+					iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+					AQuery aq = new AQuery(getActivity(), getView());
+					int ivId = MainActivity.generateViewId();
+					iv.setId(ivId);
+					llContainer.addView(iv);
+					aq.id(ivId).image(link);
+					picLink = link;
+					iv.setTag(link);
+					iv.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							String link = (String)v.getTag();
+							ImageDialog dialog = new ImageDialog(link);
+
+							dialog.show(getFragmentManager(), "image");
+							getFragmentManager().executePendingTransactions();
+
+						}
+					});
+
+				}
+			}
+		}
+		if(b.getString(ToursPagerAdapter.AUDIO_LINK)!=null && b.getString(ToursPagerAdapter.AUDIO_LINK).length()>10){
+			WebView audioPlayer = (WebView)getView().findViewById(R.id.audio_webview);
+			audioPlayer.setVisibility(View.VISIBLE);
+			audioPlayer.setInitialScale(300);
+			
+			audioPlayer.loadUrl(b.getString(ToursPagerAdapter.AUDIO_LINK));
+		}
+				
+		if(b.getString(ToursPagerAdapter.VIDEO_LINK)!=null && b.getString(ToursPagerAdapter.VIDEO_LINK).length()>10){
+			TextView vidLink = (TextView)getView().findViewById(R.id.video_link);
+			vidLink.setVisibility(View.VISIBLE);
+			SpannableString underlinedText = new SpannableString(getString(R.string.video_link));
+			underlinedText.setSpan(new UnderlineSpan(), 0, underlinedText.length(), 0);
+			vidLink.setText(underlinedText);
+			videoLink = b.getString(ToursPagerAdapter.VIDEO_LINK);
+			vidLink.setTag(videoLink);
 		}
 		
-		super.onDestroyView();
-	}
-	
-	@Override
-	public void onDetach() {
-		if(mController!= null && mController.isShowing())
-			mController.hide();
-		super.onDetach();
+		super.onResume();
 	}
 	
 	@Override
@@ -178,183 +235,9 @@ public static class TourSwipeFragment extends android.support.v4.app.Fragment{
 		return v;
 	}
 	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		Bundle b = getArguments();
-		LinearLayout llContainer = (LinearLayout)getView().findViewById(R.id.tour_pic_container);
-		if(b.getString(ToursPagerAdapter.STATION_TEXT)!=null)
-			((TextView)getView().findViewById(R.id.tour_explanation)).setText(b.getString(ToursPagerAdapter.STATION_TEXT));
-		if(b.getStringArray(ToursPagerAdapter.PIC_LINKS)!=null){
-			for(String link:b.getStringArray(ToursPagerAdapter.PIC_LINKS)){
-				ImageView iv = new ImageView(getActivity());
-				android.widget.LinearLayout.LayoutParams ivParams =   new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
-	//			ivParams = Gravity.CENTER;
-				ivParams.topMargin = 40;
-				ivParams.weight=1;
-				ivParams.setMargins(15, 15, 15, 10);
-				iv.setLayoutParams(ivParams);
-				iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
-				AQuery aq = new AQuery(getActivity(), getView());
-				int ivId = MainActivity.generateViewId();
-				iv.setId(ivId);
-				llContainer.addView(iv);
-				aq.id(ivId).image(link);
-				picLink = link;
-				iv.setTag(link);
-				iv.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View v) {
-						String link = (String)v.getTag();
-						ImageDialog dialog = new ImageDialog(link);
-						
-						dialog.show(getFragmentManager(), "image");
-						getFragmentManager().executePendingTransactions();
-										
-					}
-				});
-				
-			}
-		}
-		if(b.getString(ToursPagerAdapter.AUDIO_LINK)!=null){
-			String url = b.getString(ToursPagerAdapter.AUDIO_LINK);
-		/*	WebView wView = (WebView)getActivity().findViewById(R.id.audio_webview);
-			wView.loadUrl(url); */
-			LinearLayout audioCtnr = (LinearLayout)getView().findViewById(R.id.audio_container);
-			audioCtnr.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 200));
-			mPlayer = new MediaPlayer();
-			mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mController = new MediaController(getActivity());
-			mController.show(5000);
-			mController.setEnabled(false);
-			mPlayer.setOnPreparedListener(new OnPreparedListener() {
-				
-				@Override
-				public void onPrepared(MediaPlayer mp) {
-					mController.setEnabled(true);
-					
-				}
-			});
-			try {
-				mPlayer.setDataSource(url);
-				Log.d("before setAnchor","Stop here");
-				mController.setAnchorView(getActivity().findViewById(R.id.audio_container));
-		//		mController.setMediaPlayer((MediaPlayerControl) mPlayer);
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				mPlayer.prepareAsync();
-				Log.d("mplayer syncing","affirmative");
-			} catch (IllegalStateException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			mController.setMediaPlayer(new MediaPlayerControl() {
-				
-				@Override
-				public void start() {
-					mPlayer.start();
-					
-				}
-				
-				@Override
-				public void seekTo(int pos) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void pause() {
-					mPlayer.pause();
-					
-				}
-				
-				@Override
-				public boolean isPlaying() {
-					return mPlayer.isPlaying();
-				}
-				
-				@Override
-				public int getDuration() {
-					return mPlayer.getDuration();
-				}
-				
-				@Override
-				public int getCurrentPosition() {
-					// TODO Auto-generated method stub
-					return mPlayer.getCurrentPosition();
-				}
-				
-				@Override
-				public int getBufferPercentage() {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-				
-				@Override
-				public int getAudioSessionId() {
-					// TODO Auto-generated method stub
-					return mPlayer.getAudioSessionId();
-				}
-				
-				@Override
-				public boolean canSeekForward() {
-					// TODO Auto-generated method stub
-					return false;
-				}
-				
-				@Override
-				public boolean canSeekBackward() {
-					// TODO Auto-generated method stub
-					return false;
-				}
-				
-				@Override
-				public boolean canPause() {
-					// TODO Auto-generated method stub
-					return true;
-				}
-			});
-	//		mController.setEnabled(false);
-			
-	//		mController.show();
-			//mPlayer.start();
-		}
 		
-		if(b.getString(ToursPagerAdapter.VIDEO_LINK)!=null){
-			TextView vidLink = (TextView)getView().findViewById(R.id.video_link);
-			vidLink.setVisibility(View.VISIBLE);
-			SpannableString underlinedText = new SpannableString(b.getString(ToursPagerAdapter.VIDEO_LINK));
-			underlinedText.setSpan(new UnderlineSpan(), 0, underlinedText.length(), 0);
-			vidLink.setText(underlinedText);
-			videoLink = b.getString(ToursPagerAdapter.VIDEO_LINK);
-		}
-		getView().setOnTouchListener(new View.OnTouchListener() {
-			
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if(mController!=null && mController.isEnabled() && !mController.isShowing())
-					mController.show(5000);
-				return true;
-			}
-		});
-		
-	}
-	
-	
 	public void playVideo(View v){
+		Log.d("Fragment video", "trying to play: "+ videoLink);
 		Intent intent = new Intent( Intent.ACTION_VIEW);
 		intent.setData(Uri.parse(videoLink));
 		if (intent.resolveActivity(getActivity().getPackageManager()) != null) {

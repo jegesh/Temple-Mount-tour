@@ -33,6 +33,7 @@
     <string name="message_location_services_failure">לא הצליח להתחבר למיקום המכשיר. יש לאפשר מעקב של מיקום במכשיר, או לעשות סיור וירטואלי.</string>
     <string name="message_error">שגיאה</string>
     <string name="message_google_play_failure">לא הצליח להתחבר ל-Google Maps. יש לבדוק אם שירותי Google Play מאופשרים.</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
-
+    <string name="video_link">לחץ לצפייה בסרטון</string>
+	<string name="no_video_error">לא הותקנה במכשיר אפליקציה לצפייה בסרטונים</string>
+	<string name="error">Error: </string>
 </resources>
