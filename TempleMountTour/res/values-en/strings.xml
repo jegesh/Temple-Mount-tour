@@ -21,13 +21,13 @@
     <string name="legal_notices_confirmation">OK</string>
     <string name="title_activity_station">StationActivity</string>
     <string name="empty_list_message">No tours have been added for this station</string>
-    <string name="title_activity_station_menu">StationMenuActivity</string>
+    <string name="title_activity_station_menu"></string>
     <string name="title_station_menu">Available Tours</string>
     <string name="tour_header">You\'re being guided by:</string>
     <string name="message_gms_connect_fail">We\'re sorry, the app was unable to connect to Google Play Services. Please check that you have a working 
 	    internet connection, and that Google Play Services is enabled.</string>
     <string name="header_preparation_verification">Have you done all the following?</string>
-    <string name="link_prep_instructions">Help with preparations</string>
+    <string name="link_prep_instructions"><u>Help with preparations</u></string>
     <string name="title_activity_tour_swipe">TourSwipeActivity</string>
 	<string name="map_menu_satellite">Satellite</string>
 	<string name="map_menu_normal">Regular</string>

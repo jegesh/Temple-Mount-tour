@@ -5,6 +5,7 @@ import com.androidquery.AQuery;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -20,7 +21,7 @@ public class ImageDialog extends android.support.v4.app.DialogFragment {
 	
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()); //R.style.CustomDialog
         ImageView iv = new ImageView(getActivity());
         LinearLayout ivLayout = new LinearLayout(getActivity());
         android.widget.LinearLayout.LayoutParams llParams = new android.widget.LinearLayout.LayoutParams(android.widget.LinearLayout.LayoutParams.MATCH_PARENT, android.widget.LinearLayout.LayoutParams.MATCH_PARENT);
@@ -28,6 +29,7 @@ public class ImageDialog extends android.support.v4.app.DialogFragment {
         ivParams.weight=1f;
         iv.setLayoutParams(ivParams);
         ivLayout.setLayoutParams(llParams);
+        ivLayout.setBackgroundColor(Color.TRANSPARENT);
         ivLayout.addView(iv);
         AQuery aq = new AQuery(getActivity());
         aq.id(iv).image(source);

@@ -17,11 +17,18 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     <!--    <item name="android:windowBackground">@drawable/beit_mikdash_bg</item> --> 
     </style>
-        <style name="hr">
+    <style name="Hyperlink">
+        <item name="android:textColor">@color/hyperlink_blue</item>
+    </style>
+    <style name="hr">
        <item name = "android:layout_width">fill_parent</item>
 	   <item name="android:layout_height">2dp</item>       
    	   <item name="android:background">#0a0a0a</item>
     </style>
+    <style name="CustomDialog" parent="android:Theme.Dialog">
+    	<item name="android:windowIsTranslucent">true</item>
+    	<item name="android:windowBackground">@android:color/transparent</item>
+	</style>
     <style name="map_menu_bar" parent="@android:style/Holo.ButtonBar" >
         <item name="android:background">@drawable/gray_gradient_rect_bg</item>
     </style>

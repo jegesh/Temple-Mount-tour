@@ -21,12 +21,12 @@
     <string name="legal_notices_confirmation">אישור</string>
     <string name="title_activity_station">תחנת עניין</string>
     <string name="empty_list_message">לא קיימות הדרכות לתחנה זו כעת</string>
-    <string name="title_activity_station_menu">תפריט תחנה</string>
+    <string name="title_activity_station_menu"></string>
     <string name="title_station_menu">הדרכות זמינות</string>
     <string name="tour_header">בהדרכת:</string>
     <string name="message_gms_connect_fail">לצערי, החיבור לשירות מפות גוגל לא הצליח. נא לוודא שיש למכשיר חיבור פעיל לאינטרנט, ושירותי Google Play מחוברים</string>
     <string name="header_preparation_verification">האם עשיתם את כל ההכנות?</string>
-    <string name="link_prep_instructions">עזרה עם הכנות לעלייה</string>
+    <string name="link_prep_instructions"><u>עזרה עם הכנות לעלייה</u></string>
     <string name="title_activity_tour_swipe">הדרכות</string>
     <string name="map_menu_satellite">מפת לווין</string>
     <string name="map_menu_normal">מפה רגילה</string>

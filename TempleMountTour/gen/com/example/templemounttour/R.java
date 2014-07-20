@@ -420,7 +420,8 @@ containing a value of this type.
         public static final int smokey_glass=0x7f020029;
     }
     public static final class id {
-        public static final int action_settings=0x7f06002b;
+        public static final int action_settings=0x7f06002d;
+        public static final int audio_container=0x7f060027;
         public static final int book_now=0x7f060010;
         public static final int btn_live_tour=0x7f060016;
         public static final int btn_offline_tour=0x7f060017;
@@ -432,6 +433,7 @@ containing a value of this type.
         public static final int check_preparations=0x7f06001b;
         public static final int classic=0x7f060011;
         public static final int container=0x7f060015;
+        public static final int fragment_swipe_container=0x7f060023;
         public static final int grayscale=0x7f060012;
         public static final int header_main_menu=0x7f060014;
         public static final int holo_dark=0x7f060005;
@@ -439,7 +441,7 @@ containing a value of this type.
         public static final int hybrid=0x7f060004;
         public static final int image_dialog=0x7f060021;
         public static final int image_dialog_frame=0x7f060020;
-        public static final int legal_info=0x7f060028;
+        public static final int legal_info=0x7f06002a;
         public static final int map_container=0x7f060019;
         public static final int match_parent=0x7f06000c;
         public static final int message_unprepared=0x7f06001d;
@@ -454,15 +456,15 @@ containing a value of this type.
         public static final int station_menu_fragment_container=0x7f06001e;
         public static final int strict_sandbox=0x7f060009;
         public static final int terrain=0x7f060003;
-        public static final int toggle_normal=0x7f06002a;
-        public static final int toggle_satellite=0x7f060029;
-        public static final int tour_audio=0x7f060027;
-        public static final int tour_explanation=0x7f060026;
+        public static final int toggle_normal=0x7f06002c;
+        public static final int toggle_satellite=0x7f06002b;
+        public static final int tour_explanation=0x7f060028;
         public static final int tour_fragment_container=0x7f060022;
-        public static final int tour_header=0x7f060023;
-        public static final int tour_pic_container=0x7f060025;
-        public static final int tour_title=0x7f060024;
+        public static final int tour_header=0x7f060024;
+        public static final int tour_pic_container=0x7f060026;
+        public static final int tour_title=0x7f060025;
         public static final int txt_offline_tour=0x7f060018;
+        public static final int video_link=0x7f060029;
         public static final int wrap_content=0x7f06000d;
     }
     public static final class integer {
@@ -472,10 +474,10 @@ containing a value of this type.
         public static final int activity_main=0x7f030000;
         public static final int activity_map=0x7f030001;
         public static final int activity_prep_verify=0x7f030002;
-        public static final int activity_splash_screen=0x7f030003;
-        public static final int activity_station_menu=0x7f030004;
-        public static final int activity_tour_swipe=0x7f030005;
-        public static final int fragment_image_dialog=0x7f030006;
+        public static final int activity_station_menu=0x7f030003;
+        public static final int activity_tour_swipe=0x7f030004;
+        public static final int fragment_image_dialog=0x7f030005;
+        public static final int fragment_splash_screen=0x7f030006;
         public static final int fragment_station_menu=0x7f030007;
         public static final int fragment_tour=0x7f030008;
         public static final int google_play_failure_dialog=0x7f030009;
@@ -656,9 +658,11 @@ containing a value of this type.
     <item name="android:windowBackground">@drawable/beit_mikdash_bg</item> 
          */
         public static final int AppTheme=0x7f080005;
+        public static final int CustomDialog=0x7f080008;
         /**    <item name="android:textAlignment">center</item> 
          */
-        public static final int H1=0x7f080009;
+        public static final int H1=0x7f08000b;
+        public static final int Hyperlink=0x7f080006;
         public static final int WalletFragmentDefaultButtonTextAppearance=0x7f080002;
         public static final int WalletFragmentDefaultDetailsHeaderTextAppearance=0x7f080001;
         public static final int WalletFragmentDefaultDetailsTextAppearance=0x7f080000;
@@ -668,9 +672,9 @@ containing a value of this type.
     
          */
         public static final int WalletFragmentDefaultStyle=0x7f080003;
-        public static final int hr=0x7f080006;
-        public static final int map_menu_bar=0x7f080007;
-        public static final int minorHr=0x7f080008;
+        public static final int hr=0x7f080007;
+        public static final int map_menu_bar=0x7f080009;
+        public static final int minorHr=0x7f08000a;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.
